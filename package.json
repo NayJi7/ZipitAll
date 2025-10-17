@@ -221,7 +221,7 @@
     "dependencies": {
         "asar": "^3.2.0",
         "command-exists": "^1.2.9",
-        "compressing": "^1.10.3",
+        "compressing": "^2.0.0",
         "execa": "^9.6.0",
         "jszip": "^3.10.1",
         "pretty-bytes": "^7.0.0"
@@ -230,7 +230,7 @@
         "@types/command-exists": "^1.2.3",
         "@types/glob": "^9.0.0",
         "@types/mocha": "^10.0.10",
-        "@types/node": "~22.16.3",
+        "@types/node": "~22.18.11",
         "@types/unzipper": "^0.10.9",
         "@types/vscode": "^1.98.0",
         "@vscode/test-electron": "^2.5.2",
@@ -246,6 +246,6 @@
         "prettier": "^3.6.2",
         "rimraf": "^6.0.1",
         "stale-dep": "^0.8.2",
-        "typescript": "~5.8.3"
+        "typescript": "~5.9.3"
     }
 }
