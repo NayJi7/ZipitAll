@@ -58,7 +58,7 @@ function crxToZip(buffer: Buffer) {
     }
 
     // Create a new view for the existing buffer, and wrap it in a Blob object.
-    return Buffer.from(buffer, zipStartOffset);
+    return buffer.subarray(zipStartOffset);
 }
 
 export async function decompressCrx(archivePath: string, dest: string) {
