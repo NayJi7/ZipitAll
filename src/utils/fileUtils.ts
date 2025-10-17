@@ -166,8 +166,12 @@ export function getCommonDirectory(uris: Uri[]): string | null {
  * Get common path between two paths
  */
 export function getCommonPath(path1: string, path2: string): string {
-    const parts1 = path1.split(path.sep);
-    const parts2 = path2.split(path.sep);
+    // Normalize paths and split by both forward and backward slashes for cross-platform compatibility
+    const normalized1 = path.normalize(path1);
+    const normalized2 = path.normalize(path2);
+
+    const parts1 = normalized1.split(/[/\\]+/);
+    const parts2 = normalized2.split(/[/\\]+/);
 
     const commonParts: string[] = [];
     for (let i = 0; i < Math.min(parts1.length, parts2.length); i++) {
