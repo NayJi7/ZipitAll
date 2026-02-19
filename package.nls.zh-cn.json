@@ -1,0 +1,20 @@
+{
+    "displayName": "VSCode Archive",
+    "description": "压缩/解压 .zip/.vsix/.crx/.asar/.tgz/.gzip/.br/.tar",
+    "config.smartFlatten.description": "自动展平与归档文件同名的单一顶层文件夹，以避免冗余的嵌套文件夹。",
+    "config.preview.enabled.description": "启用归档预览。禁用时，归档文件不会在预览编辑器中打开。",
+    "config.preview.filePreviewEnabled.description": "启用从归档中预览文件。禁用时，在归档预览中点击文件不会打开它们。",
+    "config.preview.maxArchiveSizeMB.description": "可以预览的最大归档文件大小（MB）。超过此大小的归档文件将显示确认对话框。",
+    "config.preview.maxFileSizeMB.description": "可以从归档中打开的最大文件大小（MB）。超过此大小的文件将显示确认对话框。",
+    "command.decompress.title": "解压到此处",
+    "command.compressToZip.title": "zip",
+    "command.compressToAsar.title": "asar",
+    "command.compressToGzip.title": "gzip",
+    "command.compressToBr.title": "br",
+    "command.compressToTar.title": "tar",
+    "command.compressToTgz.title": "tgz",
+    "command.compressToVsix.title": "vsix",
+    "command.compressToBz2.title": "bz2",
+    "command.compressTo7z.title": "7z",
+    "submenu.compress.label": "压缩"
+}
