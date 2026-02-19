@@ -1,7 +1,7 @@
 {
     "name": "vscode-archive",
-    "displayName": "VSCode Archive",
-    "description": "compress/decompress .zip/.vsix/.crx/.asar/.tgz/.gzip/.br/.tar",
+    "displayName": "%displayName%",
+    "description": "%description%",
     "version": "0.9.5",
     "publisher": "YuTengjing",
     "icon": "./assets/logo.png",
@@ -46,50 +46,70 @@
                 "vscode-archive.smartFlatten": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Automatically flatten single top-level folder with same name as archive to avoid redundant nested folders."
+                    "description": "%config.smartFlatten.description%"
+                },
+                "vscode-archive.preview.enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%config.preview.enabled.description%"
+                },
+                "vscode-archive.preview.filePreviewEnabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%config.preview.filePreviewEnabled.description%"
+                },
+                "vscode-archive.preview.maxArchiveSizeMB": {
+                    "type": "number",
+                    "default": 100,
+                    "description": "%config.preview.maxArchiveSizeMB.description%"
+                },
+                "vscode-archive.preview.maxFileSizeMB": {
+                    "type": "number",
+                    "default": 10,
+                    "description": "%config.preview.maxFileSizeMB.description%"
                 }
             }
         },
         "commands": [
             {
                 "command": "vscode-archive.decompress",
-                "title": "Decompress Here"
+                "title": "%command.decompress.title%"
             },
             {
                 "command": "vscode-archive.compressToZip",
-                "title": "zip"
+                "title": "%command.compressToZip.title%"
             },
             {
                 "command": "vscode-archive.compressToAsar",
-                "title": "asar"
+                "title": "%command.compressToAsar.title%"
             },
             {
                 "command": "vscode-archive.compressToGzip",
-                "title": "gzip"
+                "title": "%command.compressToGzip.title%"
             },
             {
                 "command": "vscode-archive.compressToBr",
-                "title": "br"
+                "title": "%command.compressToBr.title%"
             },
             {
                 "command": "vscode-archive.compressToTar",
-                "title": "tar"
+                "title": "%command.compressToTar.title%"
             },
             {
                 "command": "vscode-archive.compressToTgz",
-                "title": "tgz"
+                "title": "%command.compressToTgz.title%"
             },
             {
                 "command": "vscode-archive.compressToVsix",
-                "title": "vsix"
+                "title": "%command.compressToVsix.title%"
             },
             {
                 "command": "vscode-archive.compressToBz2",
-                "title": "bz2"
+                "title": "%command.compressToBz2.title%"
             },
             {
                 "command": "vscode-archive.compressTo7z",
-                "title": "7z"
+                "title": "%command.compressTo7z.title%"
             }
         ],
         "menus": {
@@ -141,13 +161,13 @@
             ],
             "explorer/context": [
                 {
-                    "command": "vscode-archive.decompress",
-                    "when": "!explorerResourceIsFolder && resourceFilename =~ /.+\\.(zip|vsix|crx|asar|tgz|gzip|gz|tar|br|bz2|7z)$/i",
-                    "group": "navigation@0"
-                },
-                {
                     "submenu": "vscode-archive.compress",
                     "group": "7_modification@0"
+                },
+                {
+                    "command": "vscode-archive.decompress",
+                    "when": "!explorerResourceIsFolder && resourceFilename =~ /.+\\.(zip|vsix|crx|asar|tgz|gzip|gz|tar|br|bz2|7z)$/i",
+                    "group": "7_modification@1"
                 }
             ],
             "vscode-archive.compress": [
@@ -197,8 +217,53 @@
         "submenus": [
             {
                 "id": "vscode-archive.compress",
-                "label": "Compress"
+                "label": "%submenu.compress.label%"
             }
+        ],
+        "customEditors": [
+            {
+                "viewType": "vscode-archive.archivePreview",
+                "displayName": "Archive Preview",
+                "selector": [
+                    {
+                        "filenamePattern": "*.zip"
+                    },
+                    {
+                        "filenamePattern": "*.vsix"
+                    },
+                    {
+                        "filenamePattern": "*.crx"
+                    },
+                    {
+                        "filenamePattern": "*.asar"
+                    },
+                    {
+                        "filenamePattern": "*.tgz"
+                    },
+                    {
+                        "filenamePattern": "*.tar"
+                    },
+                    {
+                        "filenamePattern": "*.gz"
+                    },
+                    {
+                        "filenamePattern": "*.gzip"
+                    },
+                    {
+                        "filenamePattern": "*.br"
+                    },
+                    {
+                        "filenamePattern": "*.bz2"
+                    },
+                    {
+                        "filenamePattern": "*.7z"
+                    }
+                ],
+                "priority": "default"
+            }
+        ],
+        "activationEvents": [
+            "onCustomEditor:vscode-archive.archivePreview"
         ]
     },
     "prettier": "@yutengjing/prettier-config",
@@ -219,12 +284,14 @@
         "publish:open-vsx": "ovsx publish --no-dependencies"
     },
     "dependencies": {
+        "@types/tar": "^7.0.87",
         "asar": "^3.2.0",
         "command-exists": "^1.2.9",
         "compressing": "^2.0.0",
         "execa": "^9.6.0",
         "jszip": "^3.10.1",
-        "pretty-bytes": "^7.0.0"
+        "pretty-bytes": "^7.0.0",
+        "tar": "^7.5.9"
     },
     "devDependencies": {
         "@types/command-exists": "^1.2.3",
