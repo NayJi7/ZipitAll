@@ -5,6 +5,9 @@ import vscode from 'vscode';
 
 import { logger } from './logger';
 import { registerCompressCommand } from './utils/compressionUtils';
+import { archiveFileSystemProvider } from './providers/ArchiveFileSystemProvider';
+import { ArchiveEditorProvider } from './providers/ArchiveEditorProvider';
+import { globalArchiveCache } from './utils/cache';
 
 export async function handleCompress(uri: Uri, format: string) {
     const { compress } = await import('./compress');
@@ -47,8 +50,25 @@ export function activate(context: vscode.ExtensionContext) {
     registerCompressCommand(context, 'vscode-archive.compressToVsix', 'vsix');
     registerCompressCommand(context, 'vscode-archive.compressToBz2', 'bz2');
     registerCompressCommand(context, 'vscode-archive.compressTo7z', '7z');
+
+    const fsProvider = vscode.workspace.registerFileSystemProvider(
+        'archive',
+        archiveFileSystemProvider,
+        { isReadonly: true },
+    );
+    context.subscriptions.push(fsProvider);
+
+    const editorProvider = vscode.window.registerCustomEditorProvider(
+        ArchiveEditorProvider.viewType,
+        new ArchiveEditorProvider(),
+        { webviewOptions: { retainContextWhenHidden: true } },
+    );
+    context.subscriptions.push(editorProvider);
+
+    ArchiveEditorProvider.initialize(context);
 }
 
 export function deactivate() {
     logger.dispose();
+    globalArchiveCache.clear();
 }
