@@ -1,88 +1,66 @@
-# VSCode archive
+# ZipitAll
 
-<div align="center">
+Compress and decompress archives directly from VS Code.
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/YuTengjing.vscode-archive)](https://marketplace.visualstudio.com/items/YuTengjing.vscode-archive/changelog) [![Installs](https://img.shields.io/visual-studio-marketplace/i/YuTengjing.vscode-archive)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.vscode-archive) [![Downloads](https://img.shields.io/visual-studio-marketplace/d/YuTengjing.vscode-archive)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.vscode-archive) [![Rating Star](https://img.shields.io/visual-studio-marketplace/stars/YuTengjing.vscode-archive)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.vscode-archive&ssr=false#review-details) [![Last Updated](https://img.shields.io/visual-studio-marketplace/last-updated/YuTengjing.vscode-archive)](https://github.com/tjx666/vscode-archive)
+Supports `.zip`, `.vsix`, `.crx` (v3), `.asar`, `.tgz`, `.gzip`, `.br`, `.tar`, `.bz2`, `.7z`.
 
-[![CI](https://github.com/tjx666/vscode-archive/actions/workflows/ci.yml/badge.svg)](https://github.com/tjx666/vscode-archive/actions/workflows/test.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com) [![Github Open Issue](https://img.shields.io/github/issues/tjx666/vscode-archive)](https://github.com/tjx666/vscode-archive/issues) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg?style=flat-square)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+> This extension is based on [vscode-archive](https://github.com/tjx666/vscode-archive) by [YuTengjing](https://github.com/tjx666).
 
-</div>
+## Features
 
-compress/decompress .zip/.vsix/.crx(v3)/.asar/.tgz/.gzip/.br/.tar
+### Decompress
 
-## Feature
-
-### decompress
-
-decompress .zip, .vsix, .crx(v3), .asar, .tgz, .gzip, .br, .tar
-
-![decompress](https://github.com/tjx666/vscode-archive/blob/main/assets/decompress.gif?raw=true)
+Decompress `.zip`, `.vsix`, `.crx` (v3), `.asar`, `.tgz`, `.gzip`, `.br`, `.tar`, `.bz2`, `.7z` — right-click any archive in the explorer and select **Decompress Here**.
 
 #### Smart Flatten
 
-Automatically flattens redundant top-level folders that have the same name as the archive. This prevents creating unnecessary nested folders like:
+Automatically flattens redundant top-level folders that share the archive name, avoiding unnecessary nesting:
 
-```plaintext
+```
 Before: archive.zip → archive/ → archive/ → files...
 After:  archive.zip → archive/ → files...
 ```
 
-This feature is enabled by default and can be controlled via the `vscode-archive.smartFlatten` setting.
+Enabled by default. Disable via the `zipitall.smartFlatten` setting.
 
-### compress
+### Compress
 
-compress to .zip, .vsix, .asar, .tgz, .gzip, .br, .tar
+Compress files or folders to `.zip`, `.vsix`, `.asar`, `.tgz`, `.gzip`, `.br`, `.tar`, `.bz2`, `.7z` — right-click in the explorer and pick a format from the **Compress** submenu.
 
-![compress](https://github.com/tjx666/vscode-archive/blob/main/assets/compress.png?raw=true)
+### Archive Preview
+
+Open any supported archive to browse its contents in a tree view, preview files inline, and extract individual entries.
 
 ## Configuration
 
-### Smart Flatten
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `zipitall.smartFlatten` | `boolean` | `true` | Flatten single top-level folder matching archive name |
+| `zipitall.preview.enabled` | `boolean` | `true` | Enable archive preview editor |
+| `zipitall.preview.filePreviewEnabled` | `boolean` | `true` | Enable file preview from within archives |
+| `zipitall.preview.maxArchiveSizeMB` | `number` | `100` | Max archive size (MB) before confirmation dialog |
+| `zipitall.preview.maxFileSizeMB` | `number` | `10` | Max file size (MB) before confirmation dialog |
 
-- **Setting**: `vscode-archive.smartFlatten`
-- **Type**: `boolean`
-- **Default**: `true`
-- **Description**: Automatically flatten single top-level folder with same name as archive to avoid redundant nested folders.
-
-To disable this feature, add the following to your VSCode settings:
-
-```json
-{
-  "vscode-archive.smartFlatten": false
-}
-```
-
-## Note
+## Requirements
 
 ### Bzip2
 
-If you want to compress/decompress `bzip2`, the `bzip2` executable program must be installed in your system and can be accessed from shell.
+The `bzip2` executable must be available in your shell.
 
-For **MacOS** and **Linux** users, the `bzip2` normally had been pre-installed by system.
-
-But for **windows** users, you need to [install it](https://www.google.com/search?q=bzip2+windows).
+- **macOS / Linux**: usually pre-installed.
+- **Windows**: [install bzip2](https://www.google.com/search?q=bzip2+windows).
 
 ### 7zip
 
-For compress/decompress `7zip`, you need to install `7zip` and make sure executable program `7z` accessible from shell.
+The `7z` executable must be available in your shell.
 
-You can find `7zip` installation info from [7-zip official website](https://www.7-zip.org/)
+Download from the [7-zip official website](https://www.7-zip.org/).
 
-## Thanks
+## Acknowledgements
 
-- [compressing](https://github.com/node-modules/compressing) provide easy to used api for compress/decompress
+- Based on [vscode-archive](https://github.com/tjx666/vscode-archive) by [YuTengjing](https://github.com/tjx666) — thank you for the original work.
+- [compressing](https://github.com/node-modules/compressing) — easy-to-use compress/decompress API.
 
-## My extensions
+## License
 
-- [Open in External App](https://github.com/tjx666/open-in-external-app)
-- [Package Manager Enhancer](https://github.com/tjx666/package-manager-enhancer)
-- [Neo File Utils](https://github.com/tjx666/vscode-archive)
-- [Reload Can Solve Any Problems](https://github.com/tjx666/reload-can-solve-any-problems)
-- [VSCode FE Helper](https://github.com/tjx666/vscode-fe-helper)
-- [Better Colorizer](https://github.com/tjx666/better-colorizer)
-- [Modify File Warning](https://github.com/tjx666/modify-file-warning)
-- [Power Edit](https://github.com/tjx666/power-edit)
-- [Adobe Extension Development Tools](https://github.com/tjx666/vscode-adobe-extension-devtools)
-- [Scripting Listener](https://github.com/tjx666/scripting-listener)
-
-Check all here: [publishers/YuTengjing](https://marketplace.visualstudio.com/publishers/YuTengjing)
+[MIT](LICENSE)

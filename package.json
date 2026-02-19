@@ -1,9 +1,9 @@
 {
-    "name": "vscode-archive",
+    "name": "zipitall",
     "displayName": "%displayName%",
     "description": "%description%",
-    "version": "0.9.5",
-    "publisher": "YuTengjing",
+    "version": "1.0.0",
+    "publisher": "NayJi7",
     "icon": "./assets/logo.png",
     "engines": {
         "vscode": "^1.98.0"
@@ -35,35 +35,35 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/tjx666/vscode-archive"
+        "url": "https://github.com/NayJi7/ZipitAll"
     },
     "main": "./out/extension.js",
     "contributes": {
         "configuration": {
             "type": "object",
-            "title": "VSCode Archive",
+            "title": "ZipitAll",
             "properties": {
-                "vscode-archive.smartFlatten": {
+                "zipitall.smartFlatten": {
                     "type": "boolean",
                     "default": true,
                     "description": "%config.smartFlatten.description%"
                 },
-                "vscode-archive.preview.enabled": {
+                "zipitall.preview.enabled": {
                     "type": "boolean",
                     "default": true,
                     "description": "%config.preview.enabled.description%"
                 },
-                "vscode-archive.preview.filePreviewEnabled": {
+                "zipitall.preview.filePreviewEnabled": {
                     "type": "boolean",
                     "default": true,
                     "description": "%config.preview.filePreviewEnabled.description%"
                 },
-                "vscode-archive.preview.maxArchiveSizeMB": {
+                "zipitall.preview.maxArchiveSizeMB": {
                     "type": "number",
                     "default": 100,
                     "description": "%config.preview.maxArchiveSizeMB.description%"
                 },
-                "vscode-archive.preview.maxFileSizeMB": {
+                "zipitall.preview.maxFileSizeMB": {
                     "type": "number",
                     "default": 10,
                     "description": "%config.preview.maxFileSizeMB.description%"
@@ -72,157 +72,157 @@
         },
         "commands": [
             {
-                "command": "vscode-archive.decompress",
+                "command": "zipitall.decompress",
                 "title": "%command.decompress.title%"
             },
             {
-                "command": "vscode-archive.compressToZip",
+                "command": "zipitall.compressToZip",
                 "title": "%command.compressToZip.title%"
             },
             {
-                "command": "vscode-archive.compressToAsar",
+                "command": "zipitall.compressToAsar",
                 "title": "%command.compressToAsar.title%"
             },
             {
-                "command": "vscode-archive.compressToGzip",
+                "command": "zipitall.compressToGzip",
                 "title": "%command.compressToGzip.title%"
             },
             {
-                "command": "vscode-archive.compressToBr",
+                "command": "zipitall.compressToBr",
                 "title": "%command.compressToBr.title%"
             },
             {
-                "command": "vscode-archive.compressToTar",
+                "command": "zipitall.compressToTar",
                 "title": "%command.compressToTar.title%"
             },
             {
-                "command": "vscode-archive.compressToTgz",
+                "command": "zipitall.compressToTgz",
                 "title": "%command.compressToTgz.title%"
             },
             {
-                "command": "vscode-archive.compressToVsix",
+                "command": "zipitall.compressToVsix",
                 "title": "%command.compressToVsix.title%"
             },
             {
-                "command": "vscode-archive.compressToBz2",
+                "command": "zipitall.compressToBz2",
                 "title": "%command.compressToBz2.title%"
             },
             {
-                "command": "vscode-archive.compressTo7z",
+                "command": "zipitall.compressTo7z",
                 "title": "%command.compressTo7z.title%"
             }
         ],
         "menus": {
             "commandPalette": [
                 {
-                    "command": "vscode-archive.decompress",
+                    "command": "zipitall.decompress",
                     "when": "false"
                 },
                 {
-                    "command": "vscode-archive.decompress",
+                    "command": "zipitall.decompress",
                     "when": "false"
                 },
                 {
-                    "command": "vscode-archive.compressToZip",
+                    "command": "zipitall.compressToZip",
                     "when": "false"
                 },
                 {
-                    "command": "vscode-archive.compressToAsar",
+                    "command": "zipitall.compressToAsar",
                     "when": "false"
                 },
                 {
-                    "command": "vscode-archive.compressToGzip",
+                    "command": "zipitall.compressToGzip",
                     "when": "false"
                 },
                 {
-                    "command": "vscode-archive.compressToBr",
+                    "command": "zipitall.compressToBr",
                     "when": "false"
                 },
                 {
-                    "command": "vscode-archive.compressToTar",
+                    "command": "zipitall.compressToTar",
                     "when": "false"
                 },
                 {
-                    "command": "vscode-archive.compressToTgz",
+                    "command": "zipitall.compressToTgz",
                     "when": "false"
                 },
                 {
-                    "command": "vscode-archive.compressToVsix",
+                    "command": "zipitall.compressToVsix",
                     "when": "false"
                 },
                 {
-                    "command": "vscode-archive.compressToBz2",
+                    "command": "zipitall.compressToBz2",
                     "when": "false"
                 },
                 {
-                    "command": "vscode-archive.compressTo7z",
+                    "command": "zipitall.compressTo7z",
                     "when": "false"
                 }
             ],
             "explorer/context": [
                 {
-                    "submenu": "vscode-archive.compress",
+                    "submenu": "zipitall.compress",
                     "group": "7_modification@0"
                 },
                 {
-                    "command": "vscode-archive.decompress",
+                    "command": "zipitall.decompress",
                     "when": "!explorerResourceIsFolder && resourceFilename =~ /.+\\.(zip|vsix|crx|asar|tgz|gzip|gz|tar|br|bz2|7z)$/i",
                     "group": "7_modification@1"
                 }
             ],
-            "vscode-archive.compress": [
+            "zipitall.compress": [
                 {
-                    "command": "vscode-archive.compressToZip",
+                    "command": "zipitall.compressToZip",
                     "group": "compress@0"
                 },
                 {
-                    "command": "vscode-archive.compressToAsar",
+                    "command": "zipitall.compressToAsar",
                     "group": "compress@1",
                     "when": "explorerResourceIsFolder"
                 },
                 {
-                    "command": "vscode-archive.compressToGzip",
+                    "command": "zipitall.compressToGzip",
                     "group": "compress@2",
                     "when": "!explorerResourceIsFolder"
                 },
                 {
-                    "command": "vscode-archive.compressToBr",
+                    "command": "zipitall.compressToBr",
                     "group": "compress@3",
                     "when": "!explorerResourceIsFolder"
                 },
                 {
-                    "command": "vscode-archive.compressToTar",
+                    "command": "zipitall.compressToTar",
                     "group": "compress@4"
                 },
                 {
-                    "command": "vscode-archive.compressToTgz",
+                    "command": "zipitall.compressToTgz",
                     "group": "compress@5"
                 },
                 {
-                    "command": "vscode-archive.compressToVsix",
+                    "command": "zipitall.compressToVsix",
                     "group": "compress@6",
                     "when": "explorerResourceIsFolder"
                 },
                 {
-                    "command": "vscode-archive.compressToBz2",
+                    "command": "zipitall.compressToBz2",
                     "group": "compress@7",
                     "when": "!explorerResourceIsFolder"
                 },
                 {
-                    "command": "vscode-archive.compressTo7z",
+                    "command": "zipitall.compressTo7z",
                     "group": "compress@8"
                 }
             ]
         },
         "submenus": [
             {
-                "id": "vscode-archive.compress",
+                "id": "zipitall.compress",
                 "label": "%submenu.compress.label%"
             }
         ],
         "customEditors": [
             {
-                "viewType": "vscode-archive.archivePreview",
+                "viewType": "zipitall.archivePreview",
                 "displayName": "Archive Preview",
                 "selector": [
                     {
@@ -263,7 +263,7 @@
             }
         ],
         "activationEvents": [
-            "onCustomEditor:vscode-archive.archivePreview"
+            "onCustomEditor:zipitall.archivePreview"
         ]
     },
     "prettier": "@yutengjing/prettier-config",

@@ -1,5 +1,5 @@
 {
-    "displayName": "VSCode Archive",
+    "displayName": "ZipitAll",
     "description": "compress/decompress .zip/.vsix/.crx/.asar/.tgz/.gzip/.br/.tar",
     "config.smartFlatten.description": "Automatically flatten single top-level folder with same name as archive to avoid redundant nested folders.",
     "config.preview.enabled.description": "Enable archive preview. When disabled, archives will not open in the preview editor.",

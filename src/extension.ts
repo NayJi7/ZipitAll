@@ -22,7 +22,7 @@ export async function handleCompress(uri: Uri, format: string) {
 
 export function activate(context: vscode.ExtensionContext) {
     const decompressCmd = vscode.commands.registerCommand(
-        'vscode-archive.decompress',
+        'zipitall.decompress',
         async (archiveUri: Uri) => {
             const { decompress } = await import('./decompress');
             const archivePath = archiveUri.fsPath;
@@ -41,15 +41,15 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(decompressCmd);
 
     // 注册所有压缩命令
-    registerCompressCommand(context, 'vscode-archive.compressToZip', 'zip');
-    registerCompressCommand(context, 'vscode-archive.compressToAsar', 'asar');
-    registerCompressCommand(context, 'vscode-archive.compressToGzip', 'gzip');
-    registerCompressCommand(context, 'vscode-archive.compressToBr', 'br');
-    registerCompressCommand(context, 'vscode-archive.compressToTar', 'tar');
-    registerCompressCommand(context, 'vscode-archive.compressToTgz', 'tgz');
-    registerCompressCommand(context, 'vscode-archive.compressToVsix', 'vsix');
-    registerCompressCommand(context, 'vscode-archive.compressToBz2', 'bz2');
-    registerCompressCommand(context, 'vscode-archive.compressTo7z', '7z');
+    registerCompressCommand(context, 'zipitall.compressToZip', 'zip');
+    registerCompressCommand(context, 'zipitall.compressToAsar', 'asar');
+    registerCompressCommand(context, 'zipitall.compressToGzip', 'gzip');
+    registerCompressCommand(context, 'zipitall.compressToBr', 'br');
+    registerCompressCommand(context, 'zipitall.compressToTar', 'tar');
+    registerCompressCommand(context, 'zipitall.compressToTgz', 'tgz');
+    registerCompressCommand(context, 'zipitall.compressToVsix', 'vsix');
+    registerCompressCommand(context, 'zipitall.compressToBz2', 'bz2');
+    registerCompressCommand(context, 'zipitall.compressTo7z', '7z');
 
     const fsProvider = vscode.workspace.registerFileSystemProvider(
         'archive',

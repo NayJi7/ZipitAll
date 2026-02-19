@@ -79,7 +79,7 @@ export class ArchiveTreeItem extends vscode.TreeItem {
 
         if (!isDirectory) {
             this.command = {
-                command: 'vscode-archive.openEntry',
+                command: 'zipitall.openEntry',
                 title: 'Open File',
                 arguments: [entry],
             };

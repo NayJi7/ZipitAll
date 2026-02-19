@@ -11,7 +11,7 @@ describe('smartFlatten', () => {
 
     before(() => {
         // Create temporary test directory
-        testDir = join(tmpdir(), `vscode-archive-smartflatten-test-${Date.now()}`);
+        testDir = join(tmpdir(), `zipitall-smartflatten-test-${Date.now()}`);
         mkdirSync(testDir, { recursive: true });
     });
 

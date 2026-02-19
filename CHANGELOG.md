@@ -1,11 +1,23 @@
 # Change Log
 
+## [1.0.0] — Fork as ZipitAll
+
+### Changed
+
+- Forked from [vscode-archive](https://github.com/tjx666/vscode-archive) by YuTengjing
+- Rebranded to **ZipitAll** (extension ID: `zipitall`, publisher: `NayJi7`)
+- Updated all command IDs, configuration keys, and internal references
+
+---
+
+*Previous changelog from the original vscode-archive project:*
+
 ## [0.9.0] 2025-01-13
 
 ### Added
 
 - Smart flatten feature: automatically flattens redundant top-level folders with same name as archive
-- Configuration option `vscode-archive.smartFlatten` to control smart flatten behavior (enabled by default)
+- Configuration option `zipitall.smartFlatten` to control smart flatten behavior (enabled by default)
 
 ### Fixed
 

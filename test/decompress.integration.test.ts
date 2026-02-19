@@ -12,7 +12,7 @@ describe('decompress integration', () => {
 
     before(() => {
         // Create temporary test directory
-        testDir = join(tmpdir(), `vscode-archive-integration-test-${Date.now()}`);
+        testDir = join(tmpdir(), `zipitall-integration-test-${Date.now()}`);
         mkdirSync(testDir, { recursive: true });
     });
 

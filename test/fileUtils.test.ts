@@ -48,7 +48,7 @@ describe('fileUtils', () => {
 
     before(() => {
         // 创建临时测试目录
-        testDir = join(tmpdir(), `vscode-archive-test-${Date.now()}`);
+        testDir = join(tmpdir(), `zipitall-test-${Date.now()}`);
         mkdirSync(testDir, { recursive: true });
     });
 

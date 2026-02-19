@@ -1,5 +1,5 @@
 {
-    "displayName": "VSCode Archive",
+    "displayName": "ZipitAll",
     "description": "圧縮/解凍 .zip/.vsix/.crx/.asar/.tgz/.gzip/.br/.tar",
     "config.smartFlatten.description": "アーカイブと同じ名前の単一のトップレベルフォルダーを自動的にフラット化して、冗長なネストされたフォルダーを回避します。",
     "config.preview.enabled.description": "アーカイブプレビューを有効にします。無効にすると、アーカイブはプレビューエディターで開かれません。",

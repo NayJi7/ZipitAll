@@ -50,7 +50,7 @@ export async function decompress(archivePath: string, dest: string) {
     }
 
     // Check if smart flatten feature is enabled
-    const config = vscode.workspace.getConfiguration('vscode-archive');
+    const config = vscode.workspace.getConfiguration('zipitall');
     const smartFlattenEnabled = config.get<boolean>('smartFlatten', true);
 
     if (smartFlattenEnabled) {

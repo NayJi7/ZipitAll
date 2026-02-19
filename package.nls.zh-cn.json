@@ -1,5 +1,5 @@
 {
-    "displayName": "VSCode Archive",
+    "displayName": "ZipitAll",
     "description": "压缩/解压 .zip/.vsix/.crx/.asar/.tgz/.gzip/.br/.tar",
     "config.smartFlatten.description": "自动展平与归档文件同名的单一顶层文件夹，以避免冗余的嵌套文件夹。",
     "config.preview.enabled.description": "启用归档预览。禁用时，归档文件不会在预览编辑器中打开。",

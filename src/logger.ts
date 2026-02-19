@@ -7,7 +7,7 @@ class Logger {
     constructor(private name = '', private language = 'log') {}
 
     private _initChannel() {
-        const prefix = 'Vscode Archive';
+        const prefix = 'ZipitAll';
         this.channel = vscode.window.createOutputChannel(
             `${prefix} ${this.name}`.trim(),
             this.language,

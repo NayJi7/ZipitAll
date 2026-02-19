@@ -36,7 +36,7 @@ class ArchiveDocument implements vscode.CustomDocument {
 }
 
 export class ArchiveEditorProvider implements vscode.CustomReadonlyEditorProvider<ArchiveDocument> {
-    static readonly viewType = 'vscode-archive.archivePreview';
+    static readonly viewType = 'zipitall.archivePreview';
     private static currentPanel: vscode.WebviewPanel | undefined;
     private static currentDocument: ArchiveDocument | undefined;
     private static openedFileEditors: vscode.TextEditor[] = [];
@@ -61,7 +61,7 @@ export class ArchiveEditorProvider implements vscode.CustomReadonlyEditorProvide
         _token: vscode.CancellationToken,
     ): Promise<ArchiveDocument> {
         const stats = await fs.stat(uri.fsPath);
-        const config = vscode.workspace.getConfiguration('vscode-archive.preview');
+        const config = vscode.workspace.getConfiguration('zipitall.preview');
         const maxSizeMB = config.get<number>('maxArchiveSizeMB', 100);
         const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
@@ -88,7 +88,7 @@ export class ArchiveEditorProvider implements vscode.CustomReadonlyEditorProvide
         webviewPanel: vscode.WebviewPanel,
         _token: vscode.CancellationToken,
     ): Promise<void> {
-        const config = vscode.workspace.getConfiguration('vscode-archive.preview');
+        const config = vscode.workspace.getConfiguration('zipitall.preview');
         const previewEnabled = config.get<boolean>('enabled', true);
 
         if (!previewEnabled) {
@@ -103,7 +103,7 @@ export class ArchiveEditorProvider implements vscode.CustomReadonlyEditorProvide
                     if (selection === t('openSettings', lang)) {
                         vscode.commands.executeCommand(
                             'workbench.action.openSettings',
-                            'vscode-archive.preview.enabled',
+                            'zipitall.preview.enabled',
                         );
                     }
                 });
@@ -131,7 +131,7 @@ export class ArchiveEditorProvider implements vscode.CustomReadonlyEditorProvide
 
         // Apply smart flatten for preview if enabled
         const smartFlattenEnabled = vscode.workspace
-            .getConfiguration('vscode-archive')
+            .getConfiguration('zipitall')
             .get<boolean>('smartFlatten', true);
         let entriesToDisplay = document.archive.entries;
         if (smartFlattenEnabled) {
@@ -163,7 +163,7 @@ export class ArchiveEditorProvider implements vscode.CustomReadonlyEditorProvide
 
         webviewPanel.webview.onDidReceiveMessage(async (message) => {
             if (message.type === 'openFile') {
-                const config = vscode.workspace.getConfiguration('vscode-archive.preview');
+                const config = vscode.workspace.getConfiguration('zipitall.preview');
                 const filePreviewEnabled = config.get<boolean>('filePreviewEnabled', true);
 
                 if (!filePreviewEnabled) {
@@ -184,7 +184,7 @@ export class ArchiveEditorProvider implements vscode.CustomReadonlyEditorProvide
                                 if (selection === t('openSettings', lang)) {
                                     vscode.commands.executeCommand(
                                         'workbench.action.openSettings',
-                                        'vscode-archive.preview.filePreviewEnabled',
+                                        'zipitall.preview.filePreviewEnabled',
                                     );
                                 } else if (selection === t('dontTellAgain', lang)) {
                                     ArchiveEditorProvider.context?.globalState.update(

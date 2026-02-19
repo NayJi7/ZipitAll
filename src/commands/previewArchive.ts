@@ -26,7 +26,7 @@ async function loadArchiveEntries(archivePath: string): Promise<Map<string, Arch
 }
 
 export async function previewArchive(uri: vscode.Uri): Promise<void> {
-    const config = vscode.workspace.getConfiguration('vscode-archive.preview');
+    const config = vscode.workspace.getConfiguration('zipitall.preview');
     if (!config.get<boolean>('enabled', true)) {
         return;
     }
@@ -79,7 +79,7 @@ export async function openArchiveEntry(entry: ArchiveEntry): Promise<void> {
         return;
     }
 
-    const config = vscode.workspace.getConfiguration('vscode-archive.preview');
+    const config = vscode.workspace.getConfiguration('zipitall.preview');
     const maxFileSize = config.get<number>('maxFileSize', 10485760);
     const lang = getLocale();
 

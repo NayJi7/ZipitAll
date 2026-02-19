@@ -1,5 +1,5 @@
 {
-    "displayName": "VSCode Archive",
+    "displayName": "ZipitAll",
     "description": "comprimir/descomprimir .zip/.vsix/.crx/.asar/.tgz/.gzip/.br/.tar",
     "config.smartFlatten.description": "Aplanar automáticamente la carpeta única de nivel superior con el mismo nombre que el archivo para evitar carpetas anidadas redundantes.",
     "config.preview.enabled.description": "Habilitar vista previa de archivos. Cuando está deshabilitado, los archivos no se abrirán en el editor de vista previa.",
