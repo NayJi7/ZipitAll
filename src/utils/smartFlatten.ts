@@ -1,5 +1,58 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import type { ArchiveEntry } from '../models/ArchiveEntry';
+
+/**
+ * Check if entries should be flattened and return flattened entries if applicable This is the preview/virtual version
+ * that doesn't touch the filesystem
+ *
+ * @param entries Map of archive entries
+ * @param archiveName Archive filename (without extension)
+ * @returns Flattened entries map, or original if flattening not applicable
+ */
+export function flattenEntriesForPreview(
+    entries: Map<string, ArchiveEntry>,
+    archiveName: string,
+): Map<string, ArchiveEntry> {
+    const allPaths = [...entries.keys()];
+
+    if (allPaths.length === 0) {
+        return entries;
+    }
+
+    const rootPaths = allPaths.filter((p) => !p.includes('/'));
+
+    if (rootPaths.length !== 1) {
+        return entries;
+    }
+
+    const rootPath = rootPaths[0];
+    const rootEntry = entries.get(rootPath);
+
+    if (!rootEntry?.isDirectory || rootEntry.name !== archiveName) {
+        return entries;
+    }
+
+    const flattened = new Map<string, ArchiveEntry>();
+    const prefix = rootPath + '/';
+
+    for (const [path, entry] of entries) {
+        if (path === rootPath) {
+            continue;
+        }
+
+        const newPath = path.startsWith(prefix) ? path.slice(prefix.length) : path;
+        const newName = newPath.split('/').pop() || newPath;
+
+        flattened.set(newPath, {
+            ...entry,
+            path: newPath,
+            name: newName,
+        });
+    }
+
+    return flattened;
+}
 
 /**
  * Check and perform smart flattening if applicable
