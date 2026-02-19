@@ -11,18 +11,20 @@ import {
     getUniqueFileNameSync,
     validateFileName,
 } from './fileUtils';
+import { getLocale, t } from '../i18n';
 
 /**
  * Handle compression of multiple files/folders
  */
 export async function handleCompressMultiple(uris: Uri[], format: string) {
+    const lang = getLocale();
     try {
         // 1. 生成默认文件名（已经处理重名）
         const defaultName = await generateDefaultName(uris, format);
 
         // 2. 让用户输入文件名
         const fileName = await vscode.window.showInputBox({
-            prompt: `Enter name for ${format.toUpperCase()} archive`,
+            prompt: t('enterArchiveName', lang).replace('{0}', format.toUpperCase()),
             value: defaultName,
             validateInput: (value) => validateFileName(value, format),
         });
@@ -41,11 +43,11 @@ export async function handleCompressMultiple(uris: Uri[], format: string) {
         // 5. 如果用户修改了文件名，检查是否会覆盖现有文件
         if (finalFileName !== defaultName && (await fileExists(archivePath))) {
             const overwrite = await vscode.window.showWarningMessage(
-                `File "${finalFileName}" already exists. Overwrite?`,
-                'Yes',
-                'No',
+                t('fileAlreadyExists', lang).replace('{0}', finalFileName),
+                t('yes', lang),
+                t('no', lang),
             );
-            if (overwrite !== 'Yes') {
+            if (overwrite !== t('yes', lang)) {
                 return;
             }
         }
@@ -54,7 +56,9 @@ export async function handleCompressMultiple(uris: Uri[], format: string) {
         if (uris.length === 1) {
             const { compress } = await import('../compress');
             await compress(uris[0].fsPath, archivePath);
-            vscode.window.showInformationMessage(`Archive created: ${finalFileName}`);
+            vscode.window.showInformationMessage(
+                t('archiveCreated', lang).replace('{0}', finalFileName),
+            );
             return;
         }
 
@@ -86,13 +90,15 @@ export async function handleCompressMultiple(uris: Uri[], format: string) {
             await compress(tempDir, archivePath);
 
             // 10. 显示成功消息
-            vscode.window.showInformationMessage(`Archive created: ${finalFileName}`);
+            vscode.window.showInformationMessage(
+                t('archiveCreated', lang).replace('{0}', finalFileName),
+            );
         } finally {
             // 11. 清理临时文件夹
             await fs.rm(tempDir, { recursive: true, force: true });
         }
     } catch (error: any) {
-        vscode.window.showErrorMessage(`Compression failed: ${error.message}`);
+        vscode.window.showErrorMessage(t('compressionFailed', lang).replace('{0}', error.message));
     }
 }
 
@@ -105,6 +111,7 @@ export function registerCompressCommand(
     format: string,
 ) {
     const cmd = vscode.commands.registerCommand(commandId, async (...args) => {
+        const lang = getLocale();
         try {
             console.log('received args', args);
 
@@ -119,7 +126,9 @@ export function registerCompressCommand(
                 await handleCompress(uri, format);
             }
         } catch (error: any) {
-            vscode.window.showErrorMessage(`Compression failed: ${error.message}`);
+            vscode.window.showErrorMessage(
+                t('compressionFailed', lang).replace('{0}', error.message),
+            );
         }
     });
 

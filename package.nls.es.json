@@ -1,0 +1,20 @@
+{
+    "displayName": "VSCode Archive",
+    "description": "comprimir/descomprimir .zip/.vsix/.crx/.asar/.tgz/.gzip/.br/.tar",
+    "config.smartFlatten.description": "Aplanar automáticamente la carpeta única de nivel superior con el mismo nombre que el archivo para evitar carpetas anidadas redundantes.",
+    "config.preview.enabled.description": "Habilitar vista previa de archivos. Cuando está deshabilitado, los archivos no se abrirán en el editor de vista previa.",
+    "config.preview.filePreviewEnabled.description": "Habilitar vista previa de archivos desde dentro de los archivos. Cuando está deshabilitado, hacer clic en archivos en la vista previa del archivo no los abrirá.",
+    "config.preview.maxArchiveSizeMB.description": "Tamaño máximo de archivo en megabytes (MB) que se puede previsualizar. Los archivos más grandes mostrarán un diálogo de confirmación.",
+    "config.preview.maxFileSizeMB.description": "Tamaño máximo de archivo en megabytes (MB) que se puede abrir desde un archivo. Los archivos más grandes mostrarán un diálogo de confirmación.",
+    "command.decompress.title": "Descomprimir aquí",
+    "command.compressToZip.title": "zip",
+    "command.compressToAsar.title": "asar",
+    "command.compressToGzip.title": "gzip",
+    "command.compressToBr.title": "br",
+    "command.compressToTar.title": "tar",
+    "command.compressToTgz.title": "tgz",
+    "command.compressToVsix.title": "vsix",
+    "command.compressToBz2.title": "bz2",
+    "command.compressTo7z.title": "7z",
+    "submenu.compress.label": "Comprimir"
+}
