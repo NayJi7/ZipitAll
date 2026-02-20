@@ -14,8 +14,6 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
-    outputs:
-      GIT_TAG: ${{ steps.set-tag.outputs.GIT_TAG }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,7 +50,6 @@ jobs:
       - name: Cache .vscode-test
         uses: actions/cache@v4
         env:
-          # we use date as part of key because the vscode insiders updated daily
           CACHE_PREFIX: ${{ runner.os }}-vscode-test-${{ steps.date_unix.outputs.DATE || steps.date_windows.outputs.DATE }}
         with:
           path: .vscode-test
@@ -64,27 +61,16 @@ jobs:
       - run: pnpm test
         if: runner.os != 'Linux'
 
-      - name: Set GIT_TAG
-        id: set-tag
-        if: runner.os == 'Linux'
-        run: |
-          git fetch --tags origin
-          GIT_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          if [ -n "$GIT_TAG" ] && [ "$(git rev-list -n 1 $GIT_TAG 2>/dev/null || echo "")" = "$(git rev-parse HEAD)" ]; then
-            echo "GIT_TAG=${GIT_TAG}" >> $GITHUB_OUTPUT
-          else
-            echo "GIT_TAG=''" >> $GITHUB_OUTPUT
-          fi
-
-  publish:
+  bump-and-publish:
     needs: test
-    if: startsWith(needs.test.outputs.GIT_TAG, 'v')
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v4
         with:
@@ -99,6 +85,26 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Bump patch version
+        id: bump
+        run: |
+          CURRENT=$(node -p "require('./package.json').version")
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
+          NEW_PATCH=$((PATCH + 1))
+          NEW_VERSION="${MAJOR}.${MINOR}.${NEW_PATCH}"
+          npm version "$NEW_VERSION" --no-git-tag-version
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git diff --cached --quiet && exit 0
+          git commit -m "release: v${{ steps.bump.outputs.VERSION }}"
+          git tag "v${{ steps.bump.outputs.VERSION }}"
+          git push origin main --tags
+
       - name: Publish to Visual Studio Marketplace
         run: pnpm run publish:vs-marketplace
         env:
@@ -106,10 +112,6 @@ jobs:
 
       - name: Publish to Open VSX Registry
         run: pnpm run publish:open-vsx
+        continue-on-error: true
         env:
           OVSX_PAT: ${{ secrets.OPEN_VSX_TOKEN }}
-
-      - name: Github Release
-        run: npx changelogithub
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
