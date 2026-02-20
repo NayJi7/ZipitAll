@@ -689,7 +689,6 @@ function renderTree(nodes, container, depth) {
             const index = parseInt(row.dataset.index);
 
             if (e.shiftKey && lastSelectedIndex !== -1) {
-                // Shift+Click: select range (clear previous selection)
                 selectedPaths.clear();
                 const start = Math.min(lastSelectedIndex, index);
                 const end = Math.max(lastSelectedIndex, index);
@@ -700,8 +699,15 @@ function renderTree(nodes, container, depth) {
                     }
                 }
                 updateSelectionUI();
+            } else if (e.ctrlKey || e.metaKey) {
+                if (selectedPaths.has(node.path)) {
+                    selectedPaths.delete(node.path);
+                } else {
+                    selectedPaths.add(node.path);
+                }
+                lastSelectedIndex = index;
+                updateSelectionUI();
             } else {
-                // Normal click: clear selection and select only this item
                 selectedPaths.clear();
                 selectedPaths.add(node.path);
                 lastSelectedIndex = index;
