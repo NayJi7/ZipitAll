@@ -2,7 +2,7 @@
     "name": "zipitall",
     "displayName": "%displayName%",
     "description": "%description%",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "NayJi7",
     "icon": "./assets/logo.png",
     "engines": {
