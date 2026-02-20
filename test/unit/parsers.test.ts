@@ -12,7 +12,7 @@ describe('Archive Utils Test', () => {
 
     it('isArchive should return true for supported files', () => {
         assert.strictEqual(isArchive('test.zip'), true);
-        assert.strictEqual(isArchive('test.tar.gz'), false);
+        assert.strictEqual(isArchive('test.tar.gz'), true);
         assert.strictEqual(isArchive('test.txt'), false);
     });
 });
