@@ -1,6 +1,6 @@
 # ZipitAll
 
-Compress and decompress archives directly from VS Code.
+Compress, decompress and preview archives directly from VS Code.
 
 Supports `.zip`, `.vsix`, `.crx` (v3), `.asar`, `.tgz`, `.gzip`, `.br`, `.tar`, `.bz2`, `.7z`.
 
