@@ -39,18 +39,18 @@ export function getArchiveExtension(filePath: string): string | null {
     return null;
 }
 
-// URI format: archive://{encodeURIComponent(archivePath)}/{entryPath}
+// URI format: archive://{archivePath}/{entryPath}
 export function makeArchiveUri(archivePath: string, entryPath: string): vscode.Uri {
     return vscode.Uri.from({
         scheme: 'archive',
-        authority: encodeURIComponent(archivePath),
+        authority: archivePath,
         path: '/' + entryPath,
     });
 }
 
 export function parseArchiveUri(uri: vscode.Uri): { archivePath: string; entryPath: string } {
     return {
-        archivePath: decodeURIComponent(uri.authority),
+        archivePath: uri.authority,
         entryPath: uri.path.startsWith('/') ? uri.path.slice(1) : uri.path,
     };
 }
