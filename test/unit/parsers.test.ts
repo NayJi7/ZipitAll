@@ -3,22 +3,22 @@ import { ArchiveCache } from '../../src/utils/cache';
 import { detectArchiveType, isArchive } from '../../src/utils/archiveUtils';
 import type { ParsedArchive } from '../../src/models/ArchiveEntry';
 
-suite('Archive Utils Test', () => {
-    test('detectArchiveType should detect ZIP files', () => {
+describe('Archive Utils Test', () => {
+    it('detectArchiveType should detect ZIP files', () => {
         assert.strictEqual(detectArchiveType('test.zip'), 'zip');
         assert.strictEqual(detectArchiveType('test.vsix'), 'vsix');
         assert.strictEqual(detectArchiveType('test.asar'), 'asar');
     });
 
-    test('isArchive should return true for supported files', () => {
+    it('isArchive should return true for supported files', () => {
         assert.strictEqual(isArchive('test.zip'), true);
         assert.strictEqual(isArchive('test.tar.gz'), false);
         assert.strictEqual(isArchive('test.txt'), false);
     });
 });
 
-suite('Archive Cache Test', () => {
-    test('ArchiveCache should store and retrieve archives', () => {
+describe('Archive Cache Test', () => {
+    it('ArchiveCache should store and retrieve archives', () => {
         const cache = new ArchiveCache(2);
         const mockArchive: ParsedArchive = {
             entries: new Map(),
@@ -33,7 +33,7 @@ suite('Archive Cache Test', () => {
         assert.strictEqual(cache.get('key1'), mockArchive);
     });
 
-    test('ArchiveCache should evict oldest entry when full', () => {
+    it('ArchiveCache should evict oldest entry when full', () => {
         const cache = new ArchiveCache(2);
         const mockArchive: ParsedArchive = {
             entries: new Map(),
