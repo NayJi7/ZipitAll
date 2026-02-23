@@ -105,6 +105,9 @@ jobs:
           git tag "v${{ steps.bump.outputs.VERSION }}"
           git push origin main --tags
 
+      - name: Package extension
+        run: pnpm run package
+
       - name: Publish to Visual Studio Marketplace
         run: pnpm run publish:vs-marketplace
         env:
@@ -115,3 +118,12 @@ jobs:
         continue-on-error: true
         env:
           OVSX_PAT: ${{ secrets.OPEN_VSX_TOKEN }}
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "v${{ steps.bump.outputs.VERSION }}" \
+            --title "v${{ steps.bump.outputs.VERSION }}" \
+            --generate-notes \
+            "zipitall-${{ steps.bump.outputs.VERSION }}.vsix"
